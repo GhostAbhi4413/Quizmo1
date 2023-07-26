@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        ::-webkit-scrollbar{
+            height: 0;
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track{
+            background: rgba(128, 128, 128, 0.297);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb{
+            background: #02a7cd;
+            /* background: #009bbd;
+            background: #ddfafc; */
+            border-radius: 5px;
+        }
+        #qr-code{
+            box-sizing: border-box;
+            height: 256px;
+            width: 256px;
+            position: fixed;
+            top: calc( 50% - 128px );
+            left: calc( 50% - 128px );
+        }
+        .icon{
+            box-sizing: border-box;
+            height: 23px;
+            width: 23px;
+            background: #9bedffac;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 2px;
+            color: #0b687d;
+        }
+        .info{
+            display: flex;
+            height: 40px;
+            width: auto;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.317);
+            display: grid;
+            grid-template-columns: 1fr 25fr;
+        }
+        </style>
+</head>
+<body>
+    <div id="qr-code"></div>
+    <div class="info">
+        <div class="icon">i</div>
+        Scanning this QR will redirect you to the login screen.
+    </div>
+    <script src=
+        "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
+    <script>
+    var qrcode = new QRCode("qr-code", {
+        text: "http://${ip}:3000/api/main/",
+        width: 256,
+        height: 256,
+        colorDark : "#009bbd",
+        colorLight : "#ddfafc",
+        correctLevel : QRCode.CorrectLevel.H
+        });
+    </script>
+</body>
+</html>

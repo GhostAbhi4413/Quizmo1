@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizmo</title>
+    <style>
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body{
+            box-sizing: border-box;
+        }
+        form{
+            box-sizing: border-box;
+            position: fixed;
+            top: calc(50% - 75px);
+            left: calc(50% - 150px);
+            height: 150px;
+            width: 300px;
+            background: #DAF7FE;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.247);
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(3,1fr);
+            row-gap: 3px;
+            justify-content: center;
+            padding: 20px;
+        }
+        form:hover{
+            background-color: #7ceffcea;
+        }
+        button{
+            height: 80%;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            background: #01ADD5;
+            font-weight: 900;
+        }
+        button:hover{
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.217);
+            cursor: pointer;
+            background: #01c3ef;
+        }
+    </style>
+</head>
+<body>
+    <form id="role" action="/api/main/register" method="POST">
+        <span>You are a ..</span>
+        <button type="submit" form="role" name="decision" value="student">Student</button>
+        <button type="submit" form="role" name="decision" value="teacher">Teacher</button>
+    </form>
+</body>
+</html>

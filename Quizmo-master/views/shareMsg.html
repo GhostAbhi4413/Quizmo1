@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        section{
+            box-sizing: border-box;
+            border-radius: 10px;
+            height: 550px;
+            width: 800px;
+            background-color: #93f4ffea;
+            position: fixed;
+            left: calc( 50% - 400px);
+            top: calc( 50% - 275px);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.317);
+            padding: 50px;
+        }
+        #msg{
+            height: 400px;
+            width:700px;
+            border-radius: 10px;
+            border: none;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: justify;
+            font-size: .45cm;
+        }
+        #copy{
+            font-weight: 900;
+            position: relative;
+            left: 85.5%;
+            height: 40px;
+            border-radius: 3px;
+            border: none;
+            margin-top: 30px;
+            background: #01ADD5;
+        }
+        #copy:hover{
+            background: #01c3ef;
+            cursor: pointer;
+        }
+        #msg:focus,#copy:focus{
+            outline: none;
+        }
+        ::-webkit-scrollbar{
+    height: 0;
+    width: 8px;
+}
+::-webkit-scrollbar-track{
+    background: rgba(128, 128, 128, 0.297);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background: #02a7cd;
+    border-radius: 5px;
+}
+        textarea{
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <textarea id="msg">Dear students,\nA new quiz has been posted on the Quizmo platform developed by our college students.\nYou can attempt the quiz by visiting the following link:\nhttp://${ip}:3000/api/resp/login/\nMake sure you are connected to the college wifi.\nUse your name as username and quiz name as following:\n${id}</textarea>
+        <button id="copy" type="button" onclick="copyFunction()">Select Message</button>
+    </section>
+    <script>
+        function copyFunction() {
+        // Get the text field
+        var copyText = document.getElementById("msg");
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+    
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        // Alert the copied text
+        alert("Copied the text: " + copyText.value);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizmo- your test buddy</title>
+    <link rel="stylesheet" href="/CSS/Originals/index.css">
+</head>
+<body>
+    <div id="time_con">
+        <div id="time_background">
+            <div id="timer"></div>
+            <div class="scale">
+                <span id="t0">0%</span>
+                <span id="t25">25%</span>
+                <span id="t50">50%</span>
+                <span id="t75">75%</span>
+                <span style="margin-right: 0px;" id="t100">100%</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="q_btn_con">
+            <div class="blinkBox"></div>
+        </div>
+        <div id="info">
+            <div class="q_btn small attempted"></div><span> -</span>attempted
+            <div class="q_btn small marked"></div><span> -</span>marked for review
+            <div class="q_btn small skipped"></div><span> - </span>skipped
+        </div>
+        <button id="hide_btn">></button>
+    </div>
+    <form class="con">
+        <div class="ques" >
+            <div class="grph">Q</div>
+            <div id="Q"  onmousedown="return false">
+                <div class="blinkBox"></div>
+            </div>
+            <div id="pnts">
+                <div class="blinkBox"></div>
+            </div>
+        </div>
+        <div id="opt">
+            <div class="blinkBox"></div>
+        </div>
+    </form>
+    <div class="nav">
+        <button id="prev" type="submit" onclick="prev(status())">Prev.</button>
+        <button id="mAn" onclick="marked(status())">Mark for review</button>
+        <button id="next" onclick="next(status())">Next</button>
+    </div>
+    <!-- <div class="survey_con">
+        <div class="blinkBox"></div>
+    </div> -->
+    <!-- <div class="alertBck">
+        <div class="alert">
+            <span>Do you want to submit the exam?</span>
+            <button>Yes</button>
+            <button>No</button>
+        </div>
+    </div> -->
+    <script src="/Javascript/jquery.js"></script>
+    <script src="/Javascript/response.js"></script>
+    <script src="/Javascript/index.js"></script>
+</body>
+</html>

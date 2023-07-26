@@ -1,0 +1,63 @@
+*{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+body{
+    box-sizing: border-box;
+}
+#form{
+    height: 330px;
+    width: 280px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.434);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5,1fr);
+    padding: 10px 15px 10px 15px;
+    box-sizing: border-box;
+    position: fixed;
+    top: calc(50% - 165px);
+    left: calc(50% - 140px);
+    background-color: #DAF7FE;
+    transition: all 0.5s ease;
+}
+#form:hover{
+    background-color: #7ceffcea;
+}
+h1{
+    text-align: center;
+}
+#id,#pass,#quizid{
+    box-sizing: border-box;
+    height: 30px;
+    position: relative;
+    top: 20%;
+    border: none;
+    border-radius: 5px;
+    padding: 0 5px 0 5px;
+}
+#submit{
+    box-sizing: border-box;
+    height: 40px;
+    position: relative;
+    top: 15%;
+    font-size: .4cm;
+    border: none;
+    border-radius: 8px;
+    background: #01ADD5;
+    font-weight: 900;
+}
+#submit:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.217);
+    cursor: pointer;
+    background: #01c3ef;
+}
+#id:focus,#pass:focus,#submit:focus,#quizid:focus{
+    outline: none;
+}
+.rdBtn{
+    height: 10px;
+    width: 10px;
+}
+label{
+    font-size: .37cm;
+}

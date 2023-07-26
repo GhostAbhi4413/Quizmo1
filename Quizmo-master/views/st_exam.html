@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exams</title>
+    <style>
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body{
+            margin: 0;
+            padding: 50px;
+        }
+        .title{
+            font-size: .8cm;
+            font-weight: bolder;
+        }
+        .grid{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+        }
+        .card{
+            height: 250px;
+            width: 200px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.523);
+            border-radius: 10px;
+            margin: 30px;
+        }
+        .card button{
+            background: #00E5FF;
+            border: none;
+            height: 30px;
+            font-weight: bolder;
+            font-size: .4cm;
+            border-radius: 4px;
+            position: relative;
+            left: 27%;
+            top: 4px;
+        }
+        .card button:hover{
+            cursor: pointer;
+        }
+        .card div{
+            display: grid;
+            grid-template-columns: 1fr;
+            background: #F2F2F2;
+            border-radius: 8px;
+            margin: 8px;
+            height: 75%;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.144);
+            padding: 10px 8px 0 8px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .card span{
+            box-sizing: border-box;
+            overflow: hidden;
+            /* margin: 20px; */
+            border: 1.5px solid rgb(145, 145, 145);
+            border-radius: 5px;
+            height: 50px;
+            padding: 3px;
+            text-align: center;
+        }
+        .card label{
+            border: none;
+            font-size: .3cm;
+            background: #F2F2F2;
+            padding: 5px;
+            position: fixed;
+            transform: translate(-45px,-16px);
+            height: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Scheduled exams</div>
+    <div class="grid">
+        <div class="card">
+            <div>
+                <span id="topic"><label>Topic</label>DSA</span>
+                <span id="topic"><label>Time</label>30min</span>
+                <span id="topic"><label>Marks</label>20</span>
+            </div>
+            <button onclick="window.parent.location='http://localhost:5000/api/quizBank/studLogin/1'">Take Exam</button>
+        </div>
+    </div>
+</body>
+</html>

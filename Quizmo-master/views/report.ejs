@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizmo Report</title>
+  <script src="/Javascript/chart.js"></script>
+  <style>
+    *{
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+    }
+    main{
+      margin: 0;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      grid-template-rows: repeat(2,1fr);
+      column-gap: 25px;
+      row-gap: 25px;
+      background-color: rgb(247, 247, 247);
+    }
+    .gnattCon{
+      box-sizing: border-box;
+      overflow: hidden;
+      height: 400px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.311);
+      padding: 10px;
+      grid-column: 1/4;
+      background: white;
+      border-left: 8px solid #019EC3;
+    }
+    .doughnutCon{
+      box-sizing: border-box;
+      overflow: hidden;
+      height: 400px;
+      width: 350px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.311);
+      /* margin: 10px; */
+      padding: 10px;
+      grid-column: 4/5;
+      background: white;
+      border-left: 8px solid #019EC3;
+      padding-top: 10%;
+    }
+    .lineCon{
+      box-sizing: border-box;
+      overflow: hidden;
+      height: 400px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.441);
+      /* margin: 10px; */
+      padding: 10px;
+      grid-column: 2/5;
+      background: white;
+    }
+    #scoreNum{
+      overflow: hidden;
+      box-sizing: border-box;
+      height: 30px;
+      width: 150px;
+      position: relative;
+      top:calc(-49% + 35px);
+      left:calc(50% - 75px);
+      font-size: .7cm;
+      font-weight: 900;
+      text-align: center;
+    }
+    ::-webkit-scrollbar{
+      width: 10px;
+      background-color: rgb(203, 203, 203);
+    }
+    ::-webkit-scrollbar-thumb{
+      background: linear-gradient(#019EC3, #FF6384);
+      border-radius: 8px;
+    }
+    header{
+      box-sizing: border-box;
+      /* overflow: hidden; */
+      position:sticky;
+      top: 0;
+      left: 0;
+      height: 50px;
+      width: 100%;
+      background-color: rgba(138, 247, 255, 0.89);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.162);
+      border-radius: 0 0 10px 10px;
+      z-index: 100;
+    }
+    #topic{
+      box-sizing: border-box;
+      background: #0dc2eb;
+      border: 1px solid rgba(0, 0, 0, 0.158);
+      height: 50px;
+      width: 250px;
+      position:absolute;
+      left: 0;
+      padding: 12px 0 0 12px;
+      font-weight: 600;
+      font-size: 0.5cm;
+      border-radius: 3px;
+    }
+    #username{
+      display: grid;
+      grid-template-columns: 1fr 4fr;
+      column-gap: 8px;
+      box-sizing: border-box;
+      background: #0dc2eb;
+      border: 1px solid rgba(0, 0, 0, 0.158);
+      height: 50px;
+      width: 180px;
+      position:absolute;
+      right: 0;
+      padding: 8px 0 0 12px;
+      font-weight: 600;
+      font-size: 0.5cm;
+      border-radius: 3px;
+    }
+    #profile{
+      height: 30px;
+      width: 30px;
+      background: rgba(128, 128, 128, 0.347);
+      border-radius: 50%;
+      background-image: url('/images/avatar.png');
+      background-position: center;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="topic"></div>
+    <div id="username"><div id="profile"></div></div>
+  </header>
+  <main>
+
+    <div class="gnattCon">
+      <canvas id="gnattChart"></canvas>
+    </div>
+    <div class="doughnutCon">
+      <canvas id="score"></canvas>
+      <div id="scoreNum"></div>
+    </div>
+    <div class="gnattCon">
+      <canvas id="pattern"></canvas>
+    </div>
+    <div class="doughnutCon">
+      <canvas id="doughnut"></canvas>
+    </div>
+    <div class="gnattCon">
+      <canvas id="bar"></canvas>
+    </div>
+  </main>
+  <script src="/Javascript/newChart.js"></script>
+  
+</body>
+</html>

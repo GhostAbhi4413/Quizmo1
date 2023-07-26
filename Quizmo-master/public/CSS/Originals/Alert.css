@@ -1,0 +1,42 @@
+.alert{
+    position: fixed;
+    background: rgb(0, 78, 94);
+    box-sizing:border-box;
+    height: 45px;
+    /* width: 30px; */
+    overflow: hidden;
+    top: -60px;
+    left: 35%;
+    color: white;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.667);
+    padding: 12px;
+    display:flex;
+}
+.alert div{
+    box-sizing: border-box;
+    display: flex;
+    height: 21px;
+    overflow: hidden;
+}
+@keyframes pop_in {
+    from,to{
+        width: 40px;
+        left: 50%;
+        top: -60px;
+    }
+    10%,90%{
+        width: 40px;
+        left: 50%;
+        top: 20px;
+    }
+    35%,65%{
+        width: 450px;
+        /* width: auto; */
+        left: 35%;
+    }
+}
+.popIn{
+    animation: pop_in 5s ease;
+}

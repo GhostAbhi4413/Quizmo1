@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, white,#E9F4F4);
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        img{
+            padding: 19%;
+            padding-top: 0%;
+        }
+        h3{
+            position: fixed;
+            top: 80%;
+            left: 36.5%;
+            text-align: center;
+        }
+        h4{
+            position: fixed;
+            top: 83%;
+            left: 38%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <img src="/images/success2.gif" alt="Successfully submitted!">
+    <h3>Thank you for choosing our platform!</h3>
+    <h4>The quiz has been successfully posted.</h4>
+    <script>
+        function gotoMsg()
+        {
+            window.location='/api/quizbank/msg/'+window.location.search;
+        }
+        setTimeout(gotoMsg,5000);
+        function copyFunction() {
+        // Get the text field
+        var copyText = document.getElementById("msg");
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+    
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        // Alert the copied text
+        alert("Copied the text: " + copyText.value);
+    }
+    </script>
+</body>
+</html>

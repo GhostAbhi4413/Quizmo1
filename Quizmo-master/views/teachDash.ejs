@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/CSS/Originals/dashboard.css">
+    <style>
+        *:focus{
+            outline: none;
+        }
+        .con{
+            box-sizing: border-box;
+            position: fixed;
+            top: calc(50% - 75px);
+            left: calc(50% - 150px);
+            height: 150px;
+            width: 300px;
+            background: #90f4ffea;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.247);
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(2,1fr);
+            row-gap: 3px;
+            justify-content: center;
+            padding: 20px;
+        }
+        .con2{
+            margin-top: 30px;
+            margin-bottom: 30px;
+            margin-left: calc(50% - 450px);
+            box-sizing: border-box;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            height: 400px;
+            width: 900px;
+            background: rgb(244, 244, 244);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.352);
+        }
+        button{
+            height: 80%;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            background: #01ADD5;
+            font-weight: 900;
+            grid-column: 1/3;
+            margin-top: 7px;
+        }
+        button:hover{
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.217);
+            cursor: pointer;
+            background: #01c3ef;
+        }
+        form{
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-template-rows: repeat(5,1fr);
+            box-sizing: border-box;
+            position: relative;
+            height: 300px;
+            width: 400px;
+            background: #90f4ffea;
+            padding: 20px;
+            border-radius: 6px;
+            top: calc(50% - 150px);
+            left: calc(50% - 200px);
+        }
+        input,label{
+            box-sizing: border-box;
+            height: 30px;
+            position: relative;
+            top: 20%;
+            border: none;
+            border-radius: 5px;
+            padding: 0 5px 0 5px;
+        }
+        label{
+            font-weight: 500;
+            font-size: .4cm;
+        }
+        #title{
+            box-sizing: border-box;
+            grid-column: 1/3;
+            height: 80%;
+            width: 100%;
+            background: #DAF7FE;
+            text-align: center;
+            padding-top: 8px;
+            font-weight: 900;
+            font-size: 0.5cm;
+            border-radius: 8px;
+        }
+        main{
+            height: 85vh;
+        }
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 25px;
+        }
+        th,tr,td{
+            border: 1px solid rgba(0, 0, 0, 0.183);
+            margin: 0;
+            align-items: center;
+            text-align: center;
+        }
+        th{
+            background: #5dd7f2;
+        }
+        tr{
+            background: #c3f4ff;
+        }
+        .title{
+            font-weight: 900;
+            font-size: .5cm;
+        }
+    </style>
+</head>
+<body onload="loadData()">
+    <header>
+        <div id="topic">Quizmo</div>
+        <div id="username"><div id="profile"></div></div>
+    </header>
+    <main id="main">
+        <div class="con">
+            <button type="button" onclick="newTest()">Schedule new test</button>
+            <button type="button" onclick="prevTest()">Previous tests</button>
+        </div>
+    </main>
+    <script>
+        const spPath=window.location.pathname.split('/');
+        const username=spPath[spPath.length-1];
+        // document.getElementById('username').innerHTML+=username;
+        var Data;
+        async function loadData()
+        {
+            var profileData=await(await fetch("/api/teacher/getProfileData/"+username)).json();
+            var data=await(await fetch("/api/teacher/getQuizes/?class_id="+profileData.class_id)).json();
+            document.getElementById('username').innerHTML+=(profileData.name+"<span style='font-size:0.3cm; font-weight:200;'>"+profileData.class_id+"</span>");
+            Data=data;
+        }
+        function prevTest()
+        {
+            var quizes=Data;
+            document.getElementById('main').innerHTML=`
+            <div class="con2">
+            <span class="title">Previous tests</span>
+            <table id="table">
+                <tr>
+                    <th>Quiz name</th>
+                    <th>Launch date</th>
+                </tr>
+            </table>
+            </div>
+            `
+            for(let i=0;i<quizes.length;i++)
+            {
+                document.getElementById('table').innerHTML+=`
+                <tr>
+                    <td>${quizes[i].name}</td>
+                    <td>${quizes[i].date}</td>
+                </tr>
+                `
+            }
+        }
+        function newTest()
+        {
+            document.getElementById('main').innerHTML=`
+                <form action="/api/teacher/newQuiz/" method="POST">
+                    <span id="title">Quiz Details</span>
+                    <label for="name">Quiz name</label><input id="name" name="name" type="text" placeholder="Set the quiz name">
+                    <label for="class_id">Class</label><input id="class_id" name="class_id" type="text" placeholder="Enter the class name">
+                    <label for="date">Schedule date</label><input id="date" name="date" type="date">
+                    <button type="submit">Add questions</button>
+                </form>
+            `
+        }
+    </script>
+</body>
+</html>

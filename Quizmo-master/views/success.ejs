@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, white,#E9F4F4);
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        img{
+            padding: 19%;
+            padding-top: 0%;
+        }
+        h3{
+            position: fixed;
+            top: 80%;
+            left: 36.5%;
+            text-align: center;
+        }
+        h4{
+            position: fixed;
+            top: 83%;
+            left: 35%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <img src="/images/success2.gif" alt="Successfully submitted!">
+    <h3>Thank you for attempting the test!</h3>
+    <h4>Your response has been submitted successfully.</h4>
+    <script>
+        const params=new URLSearchParams(window.location.search);
+        var IDs=[];
+        for(value of params.values())
+            IDs.push(value);
+        function gotoLogin()
+        {
+            window.location='/api/student/dashboard/'+IDs[0];
+        }
+        setTimeout(gotoLogin,5000);
+    </script>
+</body>
+</html>

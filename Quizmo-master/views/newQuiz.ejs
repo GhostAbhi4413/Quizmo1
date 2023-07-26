@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post questions</title>
+    <link rel="stylesheet" href="/CSS/teacher_encrypted.css">
+    <style>
+        @keyframes roll {
+            from{
+                scale: 1;
+            }
+            50%{
+                background: #00d0ff63;
+                box-shadow: 0 3px 3px rgba(0, 0, 0, 0.217);
+                cursor: pointer;
+                scale: 1.1;
+            }
+            to{
+                scale: 1;
+            }
+        }
+        .rollIn{
+            animation: roll .6s .5s 1 ease-in-out;
+        }
+    </style>
+    <link rel="stylesheet" href="/CSS/Alert_encrypted.css">
+</head>
+<body>
+    <div class="panel">
+        <button id="backBtn" onclick="window.location='/api/resp/adminlogin/'">&#x2190</button>
+        <div class="_title" style="color: white; margin: 20px 0 20px 60px;">Select Category</div>
+        <button class="catBtn" id="YesNo"><span class="plus">+</span> Yes or No</button>
+        <button class="catBtn" id="mcq"><span class="plus">+</span> Single correct</button>
+        <button class="catBtn" id="cBox"><span class="plus">+</span> Multiple correct</button>
+        <button class="catBtn" id="fill"><span class="plus">+</span> Fill in the blanks</button>
+        <button class="catBtn" disabled><span class="plus disabled">+</span> Drag and drop <sup><span class="badge">Coming soon</span></sup></button>
+        <div class="summary">
+            <span class="_title" style="font-size: .45cm; margin-bottom: 5px; grid-column: 1/4; text-decoration:underline; text-align: center;">Questions summary</span>
+            <span class="sum">Yes or No</span><span class="sum">-</span>
+            <span class="sum" id="yes_no">0</span>
+            <span class="sum">Single correct</span><span class="sum">-</span>
+            <span class="sum" id="single">0</span>
+            <span class="sum">Multiple correct</span><span class="sum">-</span>
+            <span class="sum" id="multiple">0</span>
+            <span class="sum">Fill in the blanks</span><span class="sum">-</span>
+            <span class="sum" id="blanks">0</span>
+            <span class="sum" style="color: grey;">Drag and drop</span><span class="sum" style="color: grey;">-</span>
+            <span class="sum" id="drag" style="color: grey;">0</span>
+            <hr>
+            <span class="sum">Total questions</span><span class="sum">-</span>
+            <span class="sum" id="total">0</span>
+        </div>
+        <input type="submit" id="save" form="main" value="Submit"/>
+    </div>
+    <form method="post" id="main">
+        
+    </form>
+    <div class="alert"><section style="margin-right: 12px; color: #01d0ff; text-shadow: 0px 0px 2px #00b1d9;"><strong>&#9432</strong></section><div></div></div>
+    <script src="/Javascript/jquery.js"></script>
+    <script src="/Javascript/Alert.js"></script>
+    <script src="/Javascript/newQuiz.js"></script>
+    <script>
+        const catBtns=$('.catBtn');
+        let k=0;
+        function addTransition()
+        {
+            catBtns[k].classList+=' rollIn';
+            if(k<catBtns.length-1)
+                k++;
+            else
+                clearInterval(addTransition);
+        }
+        setInterval(addTransition,100);
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/CSS/Originals/dashboard.css">
+    <style>
+        .con{
+            margin-top: 30px;
+            margin-bottom: 30px;
+            margin-left: calc(50% - 450px);
+            box-sizing: border-box;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            height: 400px;
+            width: 900px;
+            background: rgb(244, 244, 244);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.352);
+        }
+        button{
+            height: 80%;
+            width: 70%;
+            border: none;
+            border-radius: 8px;
+            background: #01ADD5;
+            font-weight: 900;
+        }
+        button:hover{
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.217);
+            cursor: pointer;
+            background: #01c3ef;
+        }
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 25px;
+        }
+        th,tr,td{
+            border: 1px solid rgba(0, 0, 0, 0.183);
+            margin: 0;
+            align-items: center;
+            text-align: center;
+        }
+        th{
+            background: #5dd7f2;
+        }
+        tr{
+            background: #c3f4ff;
+        }
+        .title{
+            font-weight: 900;
+            font-size: .5cm;
+        }
+    </style>
+</head>
+<body onload="display()">
+    <header>
+        <div id="topic">Quizmo</div>
+        <div id="username"><div id="profile"></div></div>
+    </header>
+    <main>
+        <div class="con">
+            <span class="title">Unattempted tests</span>
+            <table id="notAttempted" >
+                <tr>
+                    <th>Quiz name</th>
+                    <th>Launched on</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+        <div class="con">
+            <span class="title">Previously attempted tests</span>
+            <table id="Attempted" >
+                <tr>
+                    <th>Quiz name</th>
+                    <th>Launched on</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+    </main>
+    <script>
+        const spPath=window.location.pathname.split('/');
+        const username=spPath[spPath.length-1];
+        async function loadData()
+        {
+            var profileData=await(await fetch("/api/student/getProfileData/"+username)).json();
+            console.log(profileData)
+            var obj={
+                "studId":username,
+                "classId":profileData.class_id
+            }
+            const options={
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(obj)
+            };
+            var Quizes= await(await fetch('/api/student/getQuizes/',options)).json();
+            document.getElementById('username').innerHTML+=(profileData.name+"<span style='font-size:0.3cm; font-weight:200;'>"+profileData.class_id+"</span>")
+            return Quizes.data;
+        }
+        async function display()
+        {
+            var data=await loadData();
+            var quizes=data;
+            const nA=document.getElementById('notAttempted');
+            const A=document.getElementById('Attempted');
+            for(let i=0;i<quizes.length;i++)
+            {
+                if(quizes[i].status)
+                {
+                    A.innerHTML+=`
+                    <tr>
+                        <td>${quizes[i].name}</td>
+                        <td>${quizes[i].date}</td>
+                        <td><button onclick="window.location.href='/api/resp/report/?ID=${username}&quizid=${quizes[i]._id}&quizname=${quizes[i].name}';">View report</button></td>
+                    </tr>
+                    `
+                }
+                else
+                {
+                    nA.innerHTML+=`
+                    <tr>
+                        <td>${quizes[i].name}</td>
+                        <td>${quizes[i].date}</td>
+                        <td><button onclick="window.location.href='/api/resp/attemptQuiz/?ID=${username}&quizid=${quizes[i]._id}';">Attempt</button></td>
+                    </tr>
+                    `
+                }
+            }
+        }
+    </script>
+</body>
+</html>

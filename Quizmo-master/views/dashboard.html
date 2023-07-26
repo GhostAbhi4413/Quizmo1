@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizmo -your test buddy</title>
+    <style>
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        button:focus{
+            outline: none;
+        }
+        body{
+            margin:0;
+            padding:0;
+            /* background: rgb(204, 204, 204); */
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 1fr 10fr;
+            column-gap: 0;
+            overflow-y: hidden;
+        }
+        .panelBack{
+            box-sizing: border-box;
+            height: 100vh;
+            width: 80px;
+            background: #595959;
+            box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.466);
+        }
+        .buttons{
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: 12%;
+            height: 60%;
+        }
+        .navBtn{
+            box-sizing: border-box;
+            /* overflow: hidden; */
+            height: 50px;
+            width: 200px;
+            border-radius: 25px;
+            border: none;
+            background: #00e5ff53;
+            display: grid;
+            grid-template-columns: 4fr 1fr;
+            transform: translateX(-75%);
+            transition: all .5s ease;
+            /* animation: bounce .5s 2 ease; */
+        }
+        .animate{
+            animation: bounce 1s 1 ease;
+        }
+        @keyframes bounce {
+            from{
+                transform: translateX(-75%);
+            }
+            25%{
+                transform: translateX(-70%);
+            }
+            50%{
+                transform: translateX(-73%);
+            }
+            75%{
+                transform: translateX(-68%);
+            }
+            to{
+                transform: translateX(-75%);
+            }
+        }
+        .navBtn:hover{
+            transform: translateX(0%);
+            background: #00e5ffce;
+            cursor: pointer;
+        }
+        .active{
+            background: #019abc;
+            transition: all .4s;
+        }
+        .icon{
+            width: 50px;
+            position: absolute;
+            right: 0px;
+            padding-right: 4px;
+            padding-top: 2px;
+        }
+        .iconCon{
+            box-sizing: border-box;
+            width: 50px;
+            position: absolute;
+            right: 0px;
+            height: 50px;
+            overflow: hidden;
+            background: grey;
+            border-radius: 25px;
+            box-shadow: -4px 0 6px rgba(0, 0, 0, 0.363);
+        }
+        .label{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: .5cm;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: rgb(55, 55, 55);
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.267);
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            padding-top: 8%;
+        }
+        .container{
+            box-sizing: border-box;
+            overflow: hidden;
+            height: 50px;
+            width: 200px;
+            border-radius: 25px;
+            border: none;
+        }
+        svg{
+            margin: 5px;
+            margin-top: 8px;
+        } 
+        .canvas{
+            padding: 0;
+            margin: 0;
+        }
+        .profile{
+            height: 70px;
+            width: 230px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.379);
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+        }
+        .dp{
+            height: 60px;
+            width: 60px;
+            margin: 5px;
+            margin-left: 10px;
+            border-radius: 50%;
+            background-image: url("../public/images/dp.png");
+            background-size: 80px auto;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 1px solid #01ADD5;
+        }
+        .info{
+            margin: 8px;
+            display: grid;
+            grid-template-rows: repeat(3,1fr);
+        }
+        #name{
+            font-weight: bolder;
+            font-size: .43cm;
+        }
+        #class{
+            font-size: .35cm;
+        }
+        #viewProfile{
+            font-size: .36cm;
+            color: #01ADD5;
+        }
+        #viewProfile:hover{
+            cursor: pointer;
+        }
+        .alert{
+            position: fixed;
+            background: rgb(50, 50, 50);
+            box-sizing:border-box;
+            height: 45px;
+            /* width: 30px; */
+            overflow: hidden;
+            top: -60px;
+            left: 35%;
+            color: white;
+            padding: 10px;
+            border-radius: 25px;
+            box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.667);
+            padding: 12px;
+            display:flex;
+        }
+        .alert div{
+            box-sizing: border-box;
+            display: flex;
+            height: 21px;
+            overflow: hidden;
+        }
+        @keyframes pop_in {
+            from,to{
+                width: 40px;
+                left: 50%;
+                top: -60px;
+            }
+            10%,90%{
+                width: 40px;
+                left: 50%;
+                top: 20px;
+            }
+            35%,65%{
+                width: 450px;
+                /* width: auto; */
+                left: 35%;
+            }
+        }
+        .popIn{
+            animation: pop_in 5s ease;
+        }
+        </style>
+</head>
+<body>
+    <div class="panelBack">
+        <section class="buttons">
+
+            <div class="container">
+                <button type="button" id="home" class="navBtn">
+                    <span class="label">home</span>
+                    <div class="iconCon"><div class="icon active">
+                            <svg>
+                                <image class="icon" xlink:href="../public/icons/home-icon-silhouette-svgrepo-com.svg" height="25" src="ppngfallback.png" />
+                            </svg>
+                        </div></div>
+                </button>
+            </div>
+            <div class="container">
+                <button type="button" id="exam" class="navBtn">
+                    <div class="iconCon"><div class="icon">
+                        <svg>
+                            <image class="icon" xlink:href="../public/icons/i-exam-multiple-choice-svgrepo-com.svg" width="30" height="30" src="ppngfallback.png" />
+                        </svg>
+                    </div></div>
+                    <span class="label">exam</span>
+                </button>
+            </div>
+            <div class="container">
+                <button type="button" id="report" class="navBtn">
+                    <div class="iconCon"><div class="icon">
+                        <svg>
+                            <image class="icon" xlink:href="../public/icons/analysis-chart-graph-svgrepo-com.svg" width="30" height="30" src="ppngfallback.png" />
+                        </svg>
+                    </div></div>
+                    <span class="label">report</span>
+                </button>
+            </div>
+            <div class="container">
+                <button type="button" id="practice" class="navBtn">
+                    <div class="iconCon"><div class="icon">
+                        <svg>
+                            <image class="icon" xlink:href="../public/icons/bullseye-svgrepo-com.svg" width="30" height="30" src="ppngfallback.png" />
+                        </svg>
+                    </div></div>
+                    <span class="label">practice</span>
+                </button>
+            </div>
+        </section>
+    </div>
+    <div class="canvas">
+        <embed type="text/html" src="./st_home.html" height="100%" width="100%">
+    </div>
+    <div class="profile">
+        <div class="dp"></div>
+        <div class="info">
+            <span id="name">Pratik Karangle</span>
+            <span id="class">TY Btech</span>
+            <span id="viewProfile">View profile</span>
+        </div>
+    </div>
+    <div class="alert"><section style="margin-right: 12px; color: #01d0ff; text-shadow: 0px 0px 2px #00b1d9;"><strong>&#9432</strong></section><div></div></div>
+    <script src="../public/Javascript/jquery.js"></script>
+    <script>
+        
+        const btns=$('.navBtn');
+        let i=0;
+        function addAnime()
+        {
+            if(i<btns.length)
+                btns[i].classList+=' animate';
+                else
+                clearInterval(addAnime);
+            i++;
+        }
+        setInterval(addAnime,100);
+        function changeClass(This)
+        {
+            const el=$('div.icon');
+            for(let i=0;i<el.length;i++)
+            {
+                if(el[i].classList.contains('active'))
+                {
+                    el[i].classList.remove("active");
+                }
+            }
+            This.classList+=' active';
+        }
+        
+        function rmPop(){
+            const Alert=$('.alert')[0];
+            if(Alert.classList.contains('popIn'))
+            Alert.classList.remove('popIn');
+        }
+        
+        function Alert(text){
+            const Alert=$('.alert')[0];
+            Alert.children[1].innerHTML=text;
+            Alert.classList+=" popIn";
+            setTimeout(rmPop, 5000);
+        }
+
+        $("body").load(Alert("Welcome Pratik! How would you like to train today?"));
+        
+        $('#home').click(function(){
+            $('.canvas')[0].innerHTML='<embed type="text/html" src="./st_home.html" height="100%" width="100%">';
+                changeClass($(this).children('.iconCon').children('.icon')[0]);
+                Alert("Welcome home")
+            });
+            $('#exam').click(function(){
+                // $('.canvas')[0].innerHTML='<embed type="text/html" src="http://localhost:5000/api/quizBank/studLogin/1" height="100%" width="100%">';
+            $('.canvas')[0].innerHTML='<embed type="text/html" src="./st_exam.html" height="100%" width="100%">';
+            changeClass($(this).children('.iconCon').children('.icon')[0]);
+        });
+        $('#report').click(function(){
+            $('.canvas')[0].innerHTML='';
+            changeClass($(this).children('.iconCon').children('.icon')[0]);
+            Alert("Reports are not available yet!");
+            
+        });
+        $('#practice').click(function(){
+            $('.canvas')[0].innerText='';
+            changeClass($(this).children('.iconCon').children('.icon')[0]);
+            Alert("Practice tests will be introduced soon..");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizmo login</title>
+    <link rel="stylesheet" href="/CSS/login_encrypted.css">
+</head>
+<body>
+    <form id="form" action="/api/main/login" method="post">
+        <h1>Login</h1>
+        <input name="id" id="id" type="text" placeholder="Username" required>
+        <input name="pass" id="pass" type="password" placeholder="Password" required>
+        <a href="/api/main/register" style="font-size: .25cm; position: fixed; left: 54.5%; top: 54.5%;">Not registered?</a>
+        <div style="display: flex; margin-top: 5%; justify-content: center;">
+            <span style="font-size: .4cm;">Login as </span>
+            <input class="rdBtn" type="radio" name="decision" value="student" required><label for="decision">Student</label>
+            <input class="rdBtn" type="radio" name="decision" value="teacher" required><label for="decision">Teacher</label>
+        </div>
+        <button id="submit" type="submit">Submit</button>
+    </form>
+    <script src="/Javascript/jquery.js"></script>
+    <script>
+        $(document).bind("contextmenu",function(e){ return false; });
+    </script>
+</body>
+</html>

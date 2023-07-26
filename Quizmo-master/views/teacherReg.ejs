@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizmo Registration</title>
+    <link rel="stylesheet" href="/CSS/Originals/registration.css">
+</head>
+<body>
+    <form action="/api/teacher/register" method="POST">
+        <span id="title">Teacher registration form</span>
+        <label for="name">Name</label><input type="text" name="name" placeholder="Enter your name" required>
+        <label for="id">Username</label><input type="text" name="_id" placeholder="choose a username" required>
+        <label for="pass">Password</label><input type="password" name="pass" placeholder="choose a password" required>
+        <label for="email">Email</label><input type="email" name="email" placeholder="Enter your email address" required>
+        <label for="class_id">Class</label><input type="text" name="class_id" placeholder="Set your class name" required>
+        <label for="key">Enrollment key</label><input type="text" name="key" placeholder="Set the class enrollment key" required>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
